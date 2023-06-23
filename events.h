@@ -6,7 +6,7 @@ class events
 {
 public:
     events();
-    precipitationPopup();
+    void precipitationPopup();
 };
 
 #endif // EVENTS_H

@@ -6,7 +6,7 @@ events::events()
 
 }
 
-events::precipitationPopup ()
+void events::precipitationPopup ()
 {
     QMessageBox popup;
     QFont font;
