@@ -11,3 +11,20 @@ Several possible applications:
 
 
 *Portable weather warner - You're on a trip and dressed for sunny weather, suddenly it starts to rain, and you had no idea. Now you'll get a notification beforehand, and be prepared
+
+
+# Problems (Cajus)
+- Trying to program in qt, serialport inclusion too hard (might not work on ArchLinux)
+  ## What I learned from that
+  - seek all the help you can get first, before spending hours on (possibly) impossible solutions
+  - compare different languages and programs before jumping into one
+
+# ToDo
+- seperate temperature and pressure
+- plot temp & pressure
+- algorithm for rain/weather prediction
+- include plot into tkinter
+- make tkinter nice looking
+- IoT instead of USB
+      - make app for android/ios
+      - cloud database? how does iot actually work?
