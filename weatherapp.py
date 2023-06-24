@@ -28,7 +28,7 @@ def precipitation_warning ():
     messagebox.showerror("PRECIPITATION WARNING!", "RAIN WARNING!")
     player.stop()
 
-#initializing window/root
+#initializing values for root/window
 root.title("Weather App") #window title
 root.configure(background="grey")
 root.minsize(800, 800)  # width, height
