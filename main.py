@@ -6,6 +6,7 @@ from matplotlib import*
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, 
 NavigationToolbar2Tk)
+import portreader
 
 #declaring root window
 root = Tk()
@@ -24,11 +25,10 @@ root.geometry("300x300+50+50")  # width x height + x + y
 
 def temperature_button_click():
    # Plot figure
-    fig = Figure(figsize = (5, 5),
-                 dpi = 100)
+    fig = Figure(figsize = (5, 5), dpi = 100)
   
     # data
-    y = [i**2 for i in range(101)]
+    y = portreader.get_data()
   
     # adding the subplot
     plot1 = fig.add_subplot(111)
