@@ -6,7 +6,7 @@ def get_data():
     baud = 115200
     ser = serial.Serial('COM5', baud)
 
-    timeout = time.time() + 5 #5 seconds into the future
+    timeout = time.time() + 10 #5 seconds into the future
 
     ser.close()
 
@@ -18,7 +18,7 @@ def get_data():
 
     while True:
         try:
-            data = ser.readline().decode().strip()
+            data = float(ser.readline().decode().strip())
             temp_list.append(data)
         except KeyboardInterrupt:
             break    
@@ -29,4 +29,4 @@ def get_data():
     # Close the serial port    
     ser.close()
 
-    return data
+    return temp_list

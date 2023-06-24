@@ -6,6 +6,7 @@ from matplotlib import*
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, 
 NavigationToolbar2Tk)
+import matplotlib.pyplot as pplt
 import portreader
 
 #declaring root window
@@ -29,12 +30,32 @@ def temperature_button_click():
   
     # data
     y = portreader.get_data()
-  
+    temperatures = []
+
+    i=0
+    j=0
+    x=[]
+
+    while i<len(y):
+        if i%2==0:
+            temperatures.append(y[i])
+            j+=1
+            x.append(j)
+        i+=1
+
     # adding the subplot
     plot1 = fig.add_subplot(111)
   
     # plotting the graph
-    plot1.plot(y)
+
+    print(*temperatures)
+
+    plot1.plot(x, temperatures)
+    #pplt.xlabel("Time: ")
+    #pplt.ylabel("Temperature C: ")
+    #pplt.title("Temperature measurements: ")
+    #pplt.show()
+
   
     # creating the Tkinter canvas with matplotlib
     canvas = FigureCanvasTkAgg(fig,master = root)  
