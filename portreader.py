@@ -18,7 +18,8 @@ def get_data():
 
     while True:
         try:
-            data = float(ser.readline().decode().strip())
+            data = ser.readline().decode().strip()
+            print(data)
             temp_list.append(data)
         except KeyboardInterrupt:
             break    
