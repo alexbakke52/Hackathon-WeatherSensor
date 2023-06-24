@@ -11,8 +11,8 @@ import portreader
 import vlc
 import altitudemeasurement
 import queue
-import time 
-import math
+# import time 
+# import math
 
 #declaring root window
 root = Tk()
@@ -136,6 +136,8 @@ entry_field2.place(x=400, y =400)
 temperature_button.place(x=150, y=150)
 height_button.place(x=150, y=400)
 
+
+
 p=[] # pressure5
 t=[] #temperatures
 
@@ -162,10 +164,17 @@ def pressure_at_sealevel(height): # ask for height once at runtime
 #ideally a queue
 P0 = pressure_at_sealevel(float(altitude))
 
+# Display Text in a box
+text_box = Text(root)
+text_box.insert(END, P0)
+text_box.place(x=150, y=600)
+
+
+
 def runtime():
     
-    starttime = time.time()
-    timeout = time.time() + 60
+    #starttime = time.time()
+    #timeout = time.time() + 60
 
     maxVal = max(P0)
     minVal = min(P0)
