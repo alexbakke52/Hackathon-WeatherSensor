@@ -10,6 +10,9 @@ import matplotlib.pyplot as pplt
 import portreader
 import vlc
 import altitudemeasurement
+import queue
+import pressure_at_sealevel
+import time 
 
 #declaring root window
 root = Tk()
@@ -37,6 +40,7 @@ root.geometry("600x600+150+150")  # width x height + x + y
 
 #Get's measurement data from portreader and separates temperature measurements
 #from air pressure measurements and returns a 'touple' of lists (temp, ap)
+# !!WILL MAKE VARIABLES t AND p IN "pressure_at_sealevel.py" UNLIMITED LONG!! IMPLEMENT QUEUE TO STORE NEWEST IF USED FOR LONG TERM MEASUREMENTS !!
 def get_measurements():
     y = portreader.get_data()
 
@@ -97,7 +101,7 @@ def temperature_button_click():
 def get_alt():
     altitude = altitudemeasurement.get_altitude(entry_field1.get(), entry_field2.get())
     messagebox.showwarning("Altitude at lat, long", altitude) 
-    return altitude
+    return float(altitude)
 
 #creating button to call graph
 temperature_button = Button(root, activebackground="dark gray", bd=4, command=temperature_button_click, width=20, height=5, text="Display temperature data")
@@ -117,7 +121,44 @@ entry_field2.place(x=400, y =400)
 temperature_button.place(x=150, y=150)
 height_button.place(x=150, y=400)
 
+# runtime function, to calculate forecast values
+
+weather_data = queue.Queue(180)
+
+def runtime():
+    
+    timeout = time.time()+60
+    
+    P0 = pressure_at_sealevel(altitude)
+
+    while timeout > time.time():
+        weather_data.get_nowait()
+        weather_data.put_nowait(P0)
+
+    weather_data_span = max(weather_data) - min(weather_data)
+
+    if weather_data_span < 1.6:
+        Zf = round(temp_zf = 127 - 0.12 * P0)
+
+        if Zf > 4:
+            precipitation_warning()
+
+    elif weather_data_span > 1.6:
+        Zr = round(temp_zr = 185 - 0.16 * P0)
+
+
+    else:
+        Zs = round(temp_zs = 144 - 0.13 * P0)
+
+        if Zs > 11:
+            precipitation_warning()
+
+
+#after method for tk objects to allow code to be run during window uptime
+root.after(0, runtime)
+
 #displays the window
 root.mainloop()
+
 
 precipitation_warning()
