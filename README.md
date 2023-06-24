@@ -30,10 +30,9 @@ For instance if it's about to rain, air quality has lowered, change in humidity 
 - include plot into tkinter DONE
 - android app WIP
 - make tkinter nice looking IN PROGRESS
-- IoT instead of USB WIP
-      - make app for android/ios prob not happening
-      - cloud database? how does iot actually work? wtf
-
+- IoT/Bluetooth instead of USB WIP
+      - Port app to android/ios probably not happening
+- Create a better looking interface for desktop application
 
 # for later
-- no feasible way to measure wind direction, it would have to be web scraped (like altitude is done)
+- no feasible way to measure wind direction given available equipment, would require web scraping or additional sensors
