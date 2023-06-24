@@ -6,9 +6,12 @@ def get_altitude(latitude, longitude):
     data = response.json()
     if 'results' in data and len(data['results']) > 0:
         altitude = data['results'][0]['elevation']
-        return altitude
+        if altitude == "":
+           return "Chosen coordinates are at sea" 
+        else:
+            return altitude
     else:
-        return None
+        return "ERROR! NO ALTITUDE FOUND"
 
 #latitude = 50.771839672338054  # Replace with your latitude
 #longitude = 6.08975644004863  # Replace with your longitude
