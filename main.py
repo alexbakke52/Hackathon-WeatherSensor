@@ -8,9 +8,12 @@ from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
 NavigationToolbar2Tk)
 import matplotlib.pyplot as pplt
 import portreader
+import altitudemeasurement
 
 #declaring root window
 root = Tk()
+
+altitude = 0
 
 def precipitation_warning ():
     messagebox.showerror("PRECIPITATION WARNING!", "RAIN WARNING!") 
@@ -74,10 +77,23 @@ def temperature_button_click():
     pplt.title("Air pressure measurements: ")
     pplt.show()
 
+
+def get_alt():
+    altitude = altitudemeasurement.get_altitude(entry_field1.get(), entry_field2.get())
+    messagebox.showwarning("Altitude at lat, long", altitude) 
+
 #creating button to call graph
 temperature_button = Button(root, activebackground="dark gray", bd=4, command=temperature_button_click, width=20, height=5, text="Display temperature data")
+entry_field1 = Entry(root, textvariable="Latitude: ")
+entry_field2 = Entry(root, textvariable="Longitude: ")
+height_button = Button(root, activebackground="dark gray", bd=4, 
+                            command=get_alt, 
+                            width=20, height=5, text="Get height at location")
 
+entry_field1.place(x=400, y=150)
+entry_field2.place(x=400, y =400)
 temperature_button.place(x=150, y=150)
+height_button.place(x=150, y=400)
 
 root.mainloop()
 
