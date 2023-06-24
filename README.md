@@ -12,13 +12,11 @@ For instance if it's about to rain, air quality has lowered, change in humidity 
 
 
 # Problems
-**Cajus**
 - Trying to program in qt, serialport inclusion too hard (might not work on ArchLinux)
   ## What I learned from that
   - seek all the help you can get first, before spending hours on (possibly) impossible solutions
   - compare different languages and programs before jumping into one
 
-**Alex**
 -Struggles with QT, also with continuously collecting data. Could probably benefit from parallellism
 -Struggles with arduino->c++ and later Python. Python made it less of an issue
 -An increased focus on project planning before actually starting to code would have been prudent
