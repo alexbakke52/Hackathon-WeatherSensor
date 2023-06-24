@@ -31,6 +31,7 @@ def temperature_button_click():
     # data
     y = portreader.get_data()
     temperatures = []
+    pascals = []
 
     i=0
     j=0
@@ -41,20 +42,16 @@ def temperature_button_click():
             temperatures.append(y[i])
             j+=1
             x.append(j)
+        else:
+            pascals.append(y[i])
+
         i+=1
 
     # adding the subplot
     plot1 = fig.add_subplot(111)
   
     # plotting the graph
-
-    print(*temperatures)
-
     plot1.plot(x, temperatures)
-    #pplt.xlabel("Time: ")
-    #pplt.ylabel("Temperature C: ")
-    #pplt.title("Temperature measurements: ")
-    #pplt.show()
 
   
     # creating the Tkinter canvas with matplotlib
@@ -71,8 +68,14 @@ def temperature_button_click():
     # placing the toolbar on the Tkinter window
     canvas.get_tk_widget().place(x=50,y=50)
 
+    pplt.plot(x, pascals)
+    pplt.xlabel("Time: ")
+    pplt.ylabel("Air pressure in pascals ")
+    pplt.title("Air pressure measurements: ")
+    pplt.show()
+
 #creating button to call graph
-temperature_button = Button(root, activebackground="black", bd=4, command=temperature_button_click, width=20, height=5, text="Display temperature data")
+temperature_button = Button(root, activebackground="dark gray", bd=4, command=temperature_button_click, width=20, height=5, text="Display temperature data")
 
 temperature_button.place(x=150, y=150)
 

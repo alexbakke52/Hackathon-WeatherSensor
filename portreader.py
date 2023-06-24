@@ -6,7 +6,7 @@ def get_data():
     baud = 115200
     ser = serial.Serial('COM5', baud)
 
-    timeout = time.time() + 10 #5 seconds into the future
+    timeout = time.time() + 10 #10 seconds into the future
 
     ser.close()
 
