@@ -17,6 +17,7 @@ root = Tk()
 #declaring needed variables
 player = vlc.MediaPlayer("alarm.mp3")
 altitude = 0
+x=[]
 y = []
 temperatures = []
 pascals = []
@@ -41,7 +42,6 @@ def get_measurements():
 
     i=0
     j=0
-    x=[]
 
     while i<len(y):
         if i%2==0:
