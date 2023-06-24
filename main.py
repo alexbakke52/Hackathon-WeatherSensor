@@ -81,6 +81,7 @@ def temperature_button_click():
 def get_alt():
     altitude = altitudemeasurement.get_altitude(entry_field1.get(), entry_field2.get())
     messagebox.showwarning("Altitude at lat, long", altitude) 
+    return altitude
 
 #creating button to call graph
 temperature_button = Button(root, activebackground="dark gray", bd=4, command=temperature_button_click, width=20, height=5, text="Display temperature data")
