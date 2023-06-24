@@ -12,6 +12,7 @@ import vlc
 import altitudemeasurement
 import queue
 import time 
+import math
 
 #declaring root window
 root = Tk()
@@ -46,7 +47,7 @@ def get_measurements():
     i=0
     j=0
 
-    while i<len(y):
+    while i<len(y)-1:
         if i%2==0:
             temperatures.append(y[i])
             j+=1
@@ -57,6 +58,21 @@ def get_measurements():
         i+=1
     return [temperatures, pascals]
 
+y = portreader.get_data()
+
+i=1
+j=1
+
+while i<len(y):
+    if i%2!=0:
+        temperatures.append(y[i])
+        j+=1
+        x.append(j)
+    else:
+        pascals.append(y[i])
+
+    i+=1
+
 #Triggered on click of temperature_button. Displays the measurement data
 #in two matplotlib plots.
 def temperature_button_click():
@@ -64,7 +80,7 @@ def temperature_button_click():
     fig = Figure(figsize = (5, 5), dpi = 100)
   
     # data
-    get_measurements()
+    #get_measurements()
 
     # adding the subplot
     plot1 = fig.add_subplot(111)
@@ -120,15 +136,13 @@ entry_field2.place(x=400, y =400)
 temperature_button.place(x=150, y=150)
 height_button.place(x=150, y=400)
 
-pressures = get_measurements()[1]
-p = [] # pressure5
-t = [] #temperatures
-celsius = get_measurements()[0]
+p=[] # pressure5
+t=[] #temperatures
 
-for temp in pressures:
+for temp in pascals:
     p.append(float(temp)*0.01)
 
-for temp in celsius:
+for temp in temperatures:
     t.append(float(temp)) # temperature 
 
 def pressure_at_sealevel(height): # ask for height once at runtime
@@ -145,9 +159,7 @@ def pressure_at_sealevel(height): # ask for height once at runtime
 
 # runtime function, to calculate forecast values
 
-weather_data = queue.Queue(180)
-
-P0 = []
+#ideally a queue
 P0 = pressure_at_sealevel(float(altitude))
 
 def runtime():
@@ -155,36 +167,26 @@ def runtime():
     starttime = time.time()
     timeout = time.time() + 60
 
-    #while TRUE:
-        #if time.time()-starttime%60==0:    
-            #weather_data.get_nowait()
-            #weather_data.put_nowait(P0)
-        
-    weather_data.get_nowait()
-    weather_data.put_nowait(P0)    
-
-    weather_data_span = max(weather_data) - min(weather_data)
+    maxVal = max(P0)
+    minVal = min(P0)
+    weather_data_span = maxVal-minVal
 
     if weather_data_span < 1.6:
-        Zf = round(temp_zf = 127 - 0.12 * P0)
+        Zf = round(127 - 0.12 * weather_data_span)
 
         if Zf > 4:
             precipitation_warning()
-
         messagebox.showwarning("Weather severity (Scale: 1-10)", Zf)
 
     elif weather_data_span > 1.6:
-        Zr = round(temp_zr = 185 - 0.16 * P0)  
+        Zr = round(185 - 0.16 * weather_data_span)  
         messagebox.showwarning("Weather severity (Scale: 1-10)", Zr)
 
     else:
-        Zs = round(temp_zs = 144 - 0.13 * P0)
-
+        Zs = round(144 - 0.13 * weather_data_span)
         if Zs > 11:
             precipitation_warning()
         messagebox.showwarning("Weather severity (Scale: 1-10)", Zs)
-
-    runtime()
 
 #after method for tk objects to allow code to be run during window uptime
 root.after(0, runtime)

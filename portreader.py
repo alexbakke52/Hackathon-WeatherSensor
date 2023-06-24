@@ -19,7 +19,6 @@ def get_data():
     while True:
         try:
             data = ser.readline().decode().strip()
-            print(data)
             temp_list.append(data)
         except KeyboardInterrupt:
             break    
@@ -29,5 +28,7 @@ def get_data():
         
     # Close the serial port    
     ser.close()
+
+    print(temp_list[:])
 
     return temp_list
