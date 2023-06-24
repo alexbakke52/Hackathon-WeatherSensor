@@ -1,7 +1,7 @@
 import weatherapp
 
-p = float (weatherapp.get_measurements()[1]) # pressure
-t = float (weatherapp.get_measurements()[0]) # temperature
+p = weatherapp.get_measurements()[1] # pressure
+t = weatherapp.get_measurements()[0] # temperature
 
 def pressure_at_sealevel(height): # ask for height once at runtime
 
