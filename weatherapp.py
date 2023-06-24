@@ -11,7 +11,6 @@ import portreader
 import vlc
 import altitudemeasurement
 import queue
-import pressure_at_sealevel
 import time 
 
 #declaring root window
@@ -121,19 +120,48 @@ entry_field2.place(x=400, y =400)
 temperature_button.place(x=150, y=150)
 height_button.place(x=150, y=400)
 
+pressures = get_measurements()[1]
+p = [] # pressure5
+t = [] #temperatures
+celsius = get_measurements()[0]
+
+for temp in pressures:
+    p.append(float(temp)*0.01)
+
+for temp in celsius:
+    t.append(float(temp)) # temperature 
+
+def pressure_at_sealevel(height): # ask for height once at runtime
+
+    pressure = []
+    #pressure = p[len(p)-1] * pow(1 - (0.0065 * height) / (t[len(t)-1] + (0.0065 * height) + 273.15), -5.257)
+
+    i = 0
+
+    while i<len(p):
+        pressure.append(p[i] * pow(1 - (0.0065 * height) / (t[i] + (0.0065 * height) + 273.15), -5.257))
+        i+=1
+    return pressure
+
 # runtime function, to calculate forecast values
 
 weather_data = queue.Queue(180)
 
+P0 = []
+P0 = pressure_at_sealevel(float(altitude))
+
 def runtime():
     
-    timeout = time.time()+60
-    
-    P0 = pressure_at_sealevel(altitude)
+    starttime = time.time()
+    timeout = time.time() + 60
 
-    while timeout > time.time():
-        weather_data.get_nowait()
-        weather_data.put_nowait(P0)
+    #while TRUE:
+        #if time.time()-starttime%60==0:    
+            #weather_data.get_nowait()
+            #weather_data.put_nowait(P0)
+        
+    weather_data.get_nowait()
+    weather_data.put_nowait(P0)    
 
     weather_data_span = max(weather_data) - min(weather_data)
 
@@ -155,6 +183,8 @@ def runtime():
         if Zs > 11:
             precipitation_warning()
         messagebox.showwarning("Weather severity (Scale: 1-10)", Zs)
+
+    runtime()
 
 #after method for tk objects to allow code to be run during window uptime
 root.after(0, runtime)
