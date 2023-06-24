@@ -20,11 +20,11 @@ Several possible applications:
   - compare different languages and programs before jumping into one
 
 # ToDo
-- seperate temperature and pressure
-- plot temp & pressure
-- algorithm for rain/weather prediction
-- include plot into tkinter
-- make tkinter nice looking
+- seperate temperature and pressure DONE
+- plot temp & pressure DONE
+- algorithm for rain/weather prediction IN PROGRESS
+- include plot into tkinter DONE
+- make tkinter nice looking IN PROGRESS
 - IoT instead of USB
       - make app for android/ios
       - cloud database? how does iot actually work?
