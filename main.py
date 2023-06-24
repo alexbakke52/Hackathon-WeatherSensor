@@ -17,9 +17,9 @@ def precipitation_warning ():
 #initializing window
 root.title("Weather App") #window title
 root.configure(background="grey")
-root.minsize(200, 200)  # width, height
-root.maxsize(500, 500)  # setting (arbitrary) max size
-root.geometry("300x300+50+50")  # width x height + x + y
+root.minsize(800, 800)  # width, height
+root.maxsize(1920, 1080)  # setting (arbitrary) max size
+root.geometry("600x600+150+150")  # width x height + x + y
 
 #label1 = ttk.Label(main_window, text="Temperature Data: ").grid(column=0, row=0, sticky=W)
 
@@ -48,14 +48,13 @@ def temperature_button_click():
     toolbar.update()
   
     # placing the toolbar on the Tkinter window
-    canvas.get_tk_widget().pack()
+    canvas.get_tk_widget().place(x=50,y=50)
 
 #creating button to call graph
-temperature_button = Button(root, activebackground="black", bd=4, command=temperature_button_click)
+temperature_button = Button(root, activebackground="black", bd=4, command=temperature_button_click, width=20, height=5, text="Display temperature data")
 
-temperature_button.pack()
-
-
-precipitation_warning()
+temperature_button.place(x=150, y=150)
 
 root.mainloop()
+
+precipitation_warning()
