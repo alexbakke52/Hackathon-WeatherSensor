@@ -27,3 +27,7 @@ Several possible applications:
 - IoT instead of USB WIP
       - make app for android/ios prob not happening
       - cloud database? how does iot actually work? wtf
+
+
+# for later
+- no feasible way to measure wind direction, it would have to be web scraped (like altitude is done)
