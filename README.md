@@ -5,8 +5,7 @@ For instance if it's about to rain, air quality has lowered, change in humidity 
 Several possible applications:
 *IoT/Smart Home 
     
-    - You're drying your clothes on a drying rack outside, but it's started to rain and now your clothes are wet. Avoid this issue by having a device that      detects the rain
-
+    - You're drying your clothes on a drying rack outside, but it's started to rain and now your clothes are wet. Avoid this issue by having a device that detects the rain
     - It's about to rain and you have windows open
 
 
@@ -22,9 +21,10 @@ Several possible applications:
 # ToDo
 - seperate temperature and pressure DONE
 - plot temp & pressure DONE
-- algorithm for rain/weather prediction IN PROGRESS
+- algorithm for rain/weather prediction DONE
 - include plot into tkinter DONE
+- android app WIP
 - make tkinter nice looking IN PROGRESS
-- IoT instead of USB
-      - make app for android/ios
-      - cloud database? how does iot actually work?
+- IoT instead of USB WIP
+      - make app for android/ios prob not happening
+      - cloud database? how does iot actually work? wtf
