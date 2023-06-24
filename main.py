@@ -14,6 +14,9 @@ import altitudemeasurement
 root = Tk()
 
 altitude = 0
+y = []
+temperatures = []
+pascals = []
 
 def precipitation_warning ():
     messagebox.showerror("PRECIPITATION WARNING!", "RAIN WARNING!") 
@@ -27,14 +30,8 @@ root.geometry("600x600+150+150")  # width x height + x + y
 
 #label1 = ttk.Label(main_window, text="Temperature Data: ").grid(column=0, row=0, sticky=W)
 
-def temperature_button_click():
-   # Plot figure
-    fig = Figure(figsize = (5, 5), dpi = 100)
-  
-    # data
+def get_measurements():
     y = portreader.get_data()
-    temperatures = []
-    pascals = []
 
     i=0
     j=0
@@ -49,6 +46,14 @@ def temperature_button_click():
             pascals.append(y[i])
 
         i+=1
+    return [temperatures, pascals]
+
+def temperature_button_click():
+   # Plot figure
+    fig = Figure(figsize = (5, 5), dpi = 100)
+  
+    # data
+    get_measurements()
 
     # adding the subplot
     plot1 = fig.add_subplot(111)
