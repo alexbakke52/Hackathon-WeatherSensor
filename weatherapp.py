@@ -143,16 +143,18 @@ def runtime():
         if Zf > 4:
             precipitation_warning()
 
-    elif weather_data_span > 1.6:
-        Zr = round(temp_zr = 185 - 0.16 * P0)
+        messagebox.showwarning("Weather severity (Scale: 1-10)", Zf)
 
+    elif weather_data_span > 1.6:
+        Zr = round(temp_zr = 185 - 0.16 * P0)  
+        messagebox.showwarning("Weather severity (Scale: 1-10)", Zr)
 
     else:
         Zs = round(temp_zs = 144 - 0.13 * P0)
 
         if Zs > 11:
             precipitation_warning()
-
+        messagebox.showwarning("Weather severity (Scale: 1-10)", Zs)
 
 #after method for tk objects to allow code to be run during window uptime
 root.after(0, runtime)
